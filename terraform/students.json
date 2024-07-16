@@ -1,0 +1,39 @@
+[
+    {
+      "documentNumber": "123456789",
+      "name": "Juan",
+      "lastName": "Pérez",
+      "address": "Calle 10C No. 56-12",
+      "phoneNumber": "1234567890",
+      "email": "juan.perez@example.com",
+      "career": "Ingeniería Civil"
+    },
+    {
+      "documentNumber": "987654321",
+      "name": "María",
+      "lastName": "García",
+      "address": "Avenida Siempreviva 742",
+      "phoneNumber": "0987654321",
+      "email": "maria.garcia@example.com",
+      "career": "Medicina"
+    },
+    {
+      "documentNumber": "112233445",
+      "name": "Carlos",
+      "lastName": "Sánchez",
+      "address": "Calle 123 No. 45-67",
+      "phoneNumber": "1122334455",
+      "email": "carlos.sanchez@example.com",
+      "career": "Derecho"
+    },
+    {
+      "documentNumber": "556677889",
+      "name": "Ana",
+      "lastName": "Martínez",
+      "address": "Carrera 34 No. 12-78",
+      "phoneNumber": "5566778899",
+      "email": "ana.martinez@example.com",
+      "career": "Arquitectura"
+    }
+
+]
