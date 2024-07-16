@@ -4,9 +4,5 @@ variable "s3_bucket_name" {
   default     = "student-uploads-bucket"
 }
 
-variable "environment" {
-  description = "The environment for the S3 bucket"
-  type        = string
-  default     = "dev"
-}
+
 
