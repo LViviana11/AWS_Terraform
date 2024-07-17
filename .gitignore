@@ -37,4 +37,7 @@ override.tf.json
 .terraformrc
 terraform.rc
 
+# Ignorar directorios node_modules en cualquier lugar del proyecto
+**/node_modules/
+
 # End of https://www.toptal.com/developers/gitignore/api/terraform

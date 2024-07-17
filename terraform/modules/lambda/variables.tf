@@ -13,6 +13,6 @@ variable "s3_lambda_function_name" {
 variable "dynamodb_table_name" {
   description = "DynamoDB table name"
   type        = string
-  default     = "students-table"
+  default     = "studentTable"
 }
 

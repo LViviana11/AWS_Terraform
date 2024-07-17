@@ -1,0 +1,16 @@
+{
+  "name": "lambda_s3_function",
+  "version": "1.0.0",
+  "main": "lambda_s3.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "aws-sdk": "^2.1659.0",
+    "uuid": "^10.0.0"
+  }
+}

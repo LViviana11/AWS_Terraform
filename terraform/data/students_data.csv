@@ -1,4 +1,4 @@
-documentNumber;name;lastName;address;phoneNumber;email;career
+documentNumb;firstName;lastName;address;phoneNumber;email;career
 998877665;Luis;Rodríguez;Calle 56 No. 78-90;9988776655;luis.rodriguez@example.com;Medicina
 445566778;Sofía;Fernández;Avenida 23 No. 45-67;4455667788;sofia.fernandez@example.com;Derecho
 334455667;Miguel;Gómez;Calle 89 No. 12-34;3344556677;miguel.gomez@example.com;Economía
