@@ -7,6 +7,14 @@ module "iam" {
   source = "./modules/iam"
 }
 
+module "lambda" {
+  source                  = "./modules/lambda"
+  crud_lambda_function_name    = var.crud_lambda_function_name
+  s3_lambda_function_name = var.s3_lambda_function_name
+  lambda_role_arn         = module.iam.lambda_dynamodb_s3_role_arn
+}
+
+
 module "s3" {
   source        = "./modules/s3"
   s3_bucket_name = var.s3_bucket_name
@@ -18,12 +26,6 @@ module "s3" {
 }
 
 
-module "lambda" {
-  source                  = "./modules/lambda"
-  crud_lambda_function_name    = var.crud_lambda_function_name
-  s3_lambda_function_name = var.s3_lambda_function_name
-  lambda_role_arn         = module.iam.lambda_dynamodb_s3_role_arn
-}
 
 module "api_gateway" {
   source = "./modules/api_gateway"
@@ -33,16 +35,18 @@ module "api_gateway" {
 
 
 
-# Subir archivo JSON a S3
+#Subir archivo JSON a S3
 resource "aws_s3_object" "students_json" {
   bucket = "${module.s3.bucket_s3_name}"
   key    = "students_data.json"
   source = "./data/students_data.json"
+  depends_on = [module.s3, module.lambda]
 }
 
 # Subir archivo CSV a S3
-resource "aws_s3_object" "students_csv" {
-  bucket = "${module.s3.bucket_s3_name}"
-  key    = "students.csv"
-  source = "./data/students_data.csv"
-}
+# resource "aws_s3_object" "students_csv" {
+#   bucket = "${module.s3.bucket_s3_name}"
+#   key    = "students.csv"
+#   source = "./data/students_data.csv"
+#   depends_on = [module.s3, module.lambda]
+# }

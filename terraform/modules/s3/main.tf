@@ -45,15 +45,6 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
   })
 }
 
-resource "aws_s3_bucket_notification" "bucket_notification" {
-  bucket = aws_s3_bucket.student_uploads_bucket.id
-
-  lambda_function {
-    lambda_function_arn = var.s3_register_lambda_arn
-    events              = ["s3:ObjectCreated:*"]
-  }
-}
-
 resource "aws_lambda_permission" "allow_s3_to_call_lambda" {
   statement_id  = "AllowS3Invoke"
   action        = "lambda:InvokeFunction"
@@ -61,3 +52,15 @@ resource "aws_lambda_permission" "allow_s3_to_call_lambda" {
   principal     = "s3.amazonaws.com"
   source_arn    = aws_s3_bucket.student_uploads_bucket.arn
 }
+
+resource "aws_s3_bucket_notification" "bucket_notification" {
+  bucket = aws_s3_bucket.student_uploads_bucket.id
+
+  lambda_function {
+    lambda_function_arn = var.s3_register_lambda_arn
+    events              = ["s3:ObjectCreated:*"]
+  }
+
+  depends_on = [aws_lambda_permission.allow_s3_to_call_lambda]
+}
+

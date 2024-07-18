@@ -17,7 +17,7 @@ resource "aws_apigatewayv2_route" "lambda_route" {
 
 resource "aws_apigatewayv2_stage" "api_stage" {
   api_id = aws_apigatewayv2_api.api.id
-  name   = "dev"  # Puedes cambiar 'dev' a cualquier nombre que desees para tu etapa
+  name   = "dev"  
   auto_deploy = true
 }
 

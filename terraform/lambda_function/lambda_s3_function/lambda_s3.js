@@ -6,6 +6,7 @@ const s3 = new AWS.S3();
 const TABLE_NAME = process.env.DYNAMODB_TABLE;
 
 exports.handler = async (event) => {
+  console.log('Received event:', JSON.stringify(event, null, 2)); // Log the event
   const bucketName = event.Records[0].s3.bucket.name;
   const objectKey = event.Records[0].s3.object.key;
 
@@ -31,6 +32,7 @@ exports.handler = async (event) => {
 
     // Almacenar cada estudiante en DynamoDB
     for (const student of students) {
+      console.log('Student:', student); // Log each student object
       const itemId = uuidv4(); // Generar un UUID único
       const dbParams = {
         TableName: TABLE_NAME,
@@ -46,7 +48,9 @@ exports.handler = async (event) => {
         }
       };
       await dynamo.put(dbParams).promise();
+      console.log(`Inserted student with ID ${itemId}`); // Log each insertion
     }
+    console.log(`Successfully processed ${students.length} records.`);
     return `Successfully processed ${students.length} records.`;
   } catch (error) {
     console.error('Error processing file:', error);
@@ -65,12 +69,36 @@ const parseJSON = async (stream) => {
 };
 
 // Función para parsear CSV
+// const parseCSV = (stream) => {
+//   return new Promise((resolve, reject) => {
+//     const results = [];
+//     stream.pipe(csv())
+//       .on('data', (data) => results.push(data))
+//       .on('end', () => resolve(results))
+//       .on('error', (error) => reject(error));
+//   });
+// };
+
 const parseCSV = (stream) => {
   return new Promise((resolve, reject) => {
     const results = [];
     stream.pipe(csv())
-      .on('data', (data) => results.push(data))
+      .on('data', (data) => {
+        // Map CSV data to the expected student object format
+        const student = {
+          documentNumb: data.documentNumb,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          address: data.address,
+          phoneNumber: data.phoneNumber,
+          email: data.email,
+          career: data.career
+        };
+        results.push(student);
+      })
       .on('end', () => resolve(results))
       .on('error', (error) => reject(error));
   });
 };
+
+
