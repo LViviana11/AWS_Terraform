@@ -65,9 +65,31 @@ const getAllItems = async (event) => {
   }
 };
 
+const checkIfStudentExists = async (documentNumb) => {
+  try {
+    const params = {
+      TableName: TABLE_NAME,
+      IndexName: 'documentNumb-index', // Usando el GSI
+      KeyConditionExpression: 'documentNumb = :documentNumb',
+      ExpressionAttributeValues: {
+        ':documentNumb': documentNumb
+      }
+    };
+    const result = await dynamo.query(params).promise();
+    return result.Items.length > 0;
+  } catch (error) {
+    console.error('Error checking if student exists:', error);
+    throw new Error('Error checking if student exists');
+  }
+};
+
 const createItem = async (event) => {
   try {
     const body = JSON.parse(event.body);
+    const studentExists = await checkIfStudentExists(body.documentNumb);
+    if (studentExists) {
+      return buildResponse(400, { message: 'Student with this document number already exists' });
+    }
     const itemId = uuidv4();
     const params = {
       TableName: TABLE_NAME,
@@ -93,25 +115,30 @@ const createItem = async (event) => {
 const updateItem = async (event) => {
   try {
     const body = JSON.parse(event.body);
+    let updateExpression = 'set';
+    let expressionAttributeValues = {};
+    let expressionAttributeNames = {};
+
+    Object.keys(body).forEach((key, index) => {
+      const attributeName = `#attr${index}`;
+      const attributeValue = `:val${index}`;
+      updateExpression += ` ${attributeName} = ${attributeValue},`;
+      expressionAttributeNames[attributeName] = key;
+      expressionAttributeValues[attributeValue] = body[key];
+    });
+
+    // Remove the trailing comma
+    updateExpression = updateExpression.slice(0, -1);
+
     const params = {
       TableName: TABLE_NAME,
       Key: {
         id: event.pathParameters.proxy
       },
-      UpdateExpression: "set documentNumb = :documentNumb, #firstName = :firstName, lastName = :lastName, address = :address, phoneNumber = :phoneNumber, email = :email, career = :career",
-      ExpressionAttributeValues: {
-        ":documentNumb": body.documentNumb,
-        ":firstName": body.firstName,
-        ":lastName": body.lastName,
-        ":address": body.address,
-        ":phoneNumber": body.phoneNumber,
-        ":email": body.email,
-        ":career": body.career
-      },
-      ExpressionAttributeNames: {
-        "#firstName": "firstName"
-      },
-      ReturnValues: "ALL_NEW"
+      UpdateExpression: updateExpression,
+      ExpressionAttributeNames: expressionAttributeNames,
+      ExpressionAttributeValues: expressionAttributeValues,
+      ReturnValues: 'ALL_NEW'
     };
     const result = await dynamo.update(params).promise();
     return buildResponse(200, result.Attributes);
