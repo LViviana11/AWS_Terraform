@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Student } from '../../../models/student.interface';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
-  private apiUrl = 'https://sav0d1erw2.execute-api.us-west-1.amazonaws.com/dev/';
+  // private apiUrl = 'https://sav0d1erw2.execute-api.us-west-1.amazonaws.com/dev/';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
