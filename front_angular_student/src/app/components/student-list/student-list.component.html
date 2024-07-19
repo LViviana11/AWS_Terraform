@@ -8,13 +8,14 @@
 <table class="table table-bordered mb-0">
     <thead>
         <tr>
-            <th>No. Documento</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Carrera</th>
-            <th>Direccion</th>
-            <th>Teléfono</th>
-            <th>Email</th>
+            <th class="text-center">No. Documento</th>
+            <th class="text-center">Nombre</th>
+            <th class="text-center">Apellido</th>
+            <th class="text-center">Carrera</th>
+            <th class="text-center">Direccion</th>
+            <th class="text-center">Teléfono</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Acciones</th>
             
         </tr>
     </thead>
@@ -28,6 +29,24 @@
                 <td>{{student.address}}</td>
                 <td>{{student.phoneNumber}}</td>
                 <td>{{student.email}}</td>
+                <td>
+                    <div class="btn-group">
+
+                        <!-- ver -->
+                        <button class="btn btn-primary">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <!-- editar -->
+                        <button class="btn btn-success" [routerLink]="[student.id, 'edit']">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <!-- eliminar -->
+                        <button class="btn btn-danger" (click)="deleteStudent(student)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                   
+                </td>
             </tr>
         }
 
