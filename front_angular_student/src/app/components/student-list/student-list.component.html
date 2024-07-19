@@ -1,0 +1,36 @@
+<h2 class="mb-5 text-center">Lista de estudiantes</h2>
+
+<div class="text-end mb-2">
+    <button class="btn btn-primary" routerLink="new">
+        Nuevo contacto
+    </button>
+</div>
+<table class="table table-bordered mb-0">
+    <thead>
+        <tr>
+            <th>No. Documento</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Carrera</th>
+            <th>Direccion</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @for(student of students; track student.id){
+            <tr>
+                <td>{{student.documentNumb}}</td>
+                <td>{{student.firstName}}</td>
+                <td>{{student.lastName}}</td>
+                <td>{{student.career}}</td>
+                <td>{{student.address}}</td>
+                <td>{{student.phoneNumber}}</td>
+                <td>{{student.email}}</td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
