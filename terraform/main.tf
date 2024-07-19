@@ -19,7 +19,6 @@ module "s3" {
   source        = "./modules/s3"
   s3_bucket_name = var.s3_bucket_name
   lambda_role_arn     = module.iam.lambda_dynamodb_s3_role_arn
-  # s3_register_lambda_arn = module.lambda.s3_lambda_invoke_arn
   s3_register_lambda_arn = module.lambda.s3_lambda_function_arn #nuevo
   s3_register_lambda_name = module.lambda.s3_lambda_function_name
   

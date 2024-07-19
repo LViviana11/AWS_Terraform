@@ -68,16 +68,6 @@ const parseJSON = async (stream) => {
   });
 };
 
-// Función para parsear CSV
-// const parseCSV = (stream) => {
-//   return new Promise((resolve, reject) => {
-//     const results = [];
-//     stream.pipe(csv())
-//       .on('data', (data) => results.push(data))
-//       .on('end', () => resolve(results))
-//       .on('error', (error) => reject(error));
-//   });
-// };
 
 const parseCSV = (stream) => {
   return new Promise((resolve, reject) => {
