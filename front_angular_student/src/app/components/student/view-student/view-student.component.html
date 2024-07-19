@@ -1,0 +1,19 @@
+<h4 class="mb-5 text-center">Detalles del estudiante</h4>
+<div class="card w-25 mx-auto">
+    <div class="card  ">
+        <div class="card-header">
+          ID: {{ student?.id }}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ student?.firstName }} {{ student?.lastName }}</h5>
+          <p class="card-text">
+            Carrera: {{ student?.career }} <br>
+            Dirección: {{ student?.address }} <br>
+            Teléfono: {{ student?.phoneNumber }} <br>
+            Email: {{ student?.email }}
+          </p>
+          <button type="button" class="btn btn-primary me-1" routerLink="/">Volver</button>
+        </div>
+      </div>
+      
+</div>

@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { StudentService } from '../../core/services/student-aws/student.service';
+import { StudentService } from '../../../core/services/student-aws/student.service';
 import { RouterModule } from '@angular/router';
-import { Student } from '../../models/student.interface';
+import { Student } from '../../../models/student.interface';
 
 @Component({
   selector: 'app-student-list',

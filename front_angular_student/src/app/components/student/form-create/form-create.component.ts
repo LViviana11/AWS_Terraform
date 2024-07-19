@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { StudentService } from '../../core/services/student-aws/student.service';
-import { Student } from '../../models/student.interface';
+import { StudentService } from '../../../core/services/student-aws/student.service';
+import { Student } from '../../../models/student.interface';
 
 @Component({
   selector: 'app-form-create',

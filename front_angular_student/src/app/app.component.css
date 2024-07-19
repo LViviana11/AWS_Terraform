@@ -1,0 +1,20 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column; /* Esto hará que todos los hijos directos se alineen en columna */
+    min-height: 100vh; /* Uso de unidades vh para asegurar que toma al menos el tamaño de la ventana */
+  }
+  
+  .container {
+    flex: 1; /* Esto permite que el contenedor expanda y llene el espacio disponible, empujando el footer hacia abajo */
+  }
+  
+  footer {
+    flex-shrink: 0; /* Asegura que el footer no se encoge, independientemente del contenido */
+  }
+  
